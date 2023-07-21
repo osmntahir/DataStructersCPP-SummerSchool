@@ -4,8 +4,8 @@
 
 ## Description
 This project aims to read data from a file called "Numbers.txt" and organize the numbers into two singly linked lists as shown in the image below. The program will prompt the user to input two index positions (A and B) to switch the positions of the upward and downward linked lists. Finally, it will calculate and display the average of the numbers in the linked lists.
-![Linked List Structure1]([https://github.com/osmntahir/DataStructersCPP-SummerSchool/blob/main/doc/Ads%C4%B1z.png](https://github.com/osmntahir/DataStructersCPP-SummerSchool/blob/main/doc/image1.png))
-![Linked List Structure2]([https://github.com/osmntahir/DataStructersCPP-SummerSchool/blob/main/doc/Ads%C4%B1z.png](https://github.com/osmntahir/DataStructersCPP-SummerSchool/blob/main/doc/image2.png))
+![Linked List Structure1](https://github.com/osmntahir/DataStructersCPP-SummerSchool/blob/main/doc/Ads%C4%B1z.png](https://github.com/osmntahir/DataStructersCPP-SummerSchool/blob/main/doc/image1.png))
+![Linked List Structure2](https://github.com/osmntahir/DataStructersCPP-SummerSchool/blob/main/doc/Ads%C4%B1z.png](https://github.com/osmntahir/DataStructersCPP-SummerSchool/blob/main/doc/image2.png))
 
 ## Requirements
 - MinGW C++ Compiler
