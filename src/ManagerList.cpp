@@ -1,5 +1,5 @@
 #include "ManagerList.hpp"
-#include <iostream>
+
 ManagerList::ManagerList()
 {
     firstBox = nullptr;
