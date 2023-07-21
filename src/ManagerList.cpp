@@ -1,0 +1,200 @@
+#include "ManagerList.hpp"
+#include <iostream>
+ManagerList::ManagerList()
+{
+    firstBox = nullptr;
+    boxCount = 0;
+    fullboxCount = 0;
+}
+void ManagerList::swapLinkedList(int location1 , int location2)
+{
+    LinkedList * temp =getBox(location2)->LocationB;
+    getBox(location2)->LocationB = getBox(location1)->LocationA;
+    getBox(location1)->LocationA = temp;
+
+}
+bool ManagerList::IsThereNodeInBoxesLocA(int index)
+{
+     Box* currentBox = firstBox;
+    while(currentBox !=nullptr)
+    {
+        if(currentBox->LocationA->getNode(index) == nullptr)
+        {
+            IsThereNode = false;
+        }
+        else
+        {
+            IsThereNode =true;
+            fullboxCount++;
+        }
+        currentBox = currentBox->nextBox;
+    }
+    return IsThereNode;
+}
+bool ManagerList::IsThereNodeInBoxesLocB(int index)
+{
+     Box* currentBox = firstBox;
+    while(currentBox !=nullptr)
+    {
+        if(currentBox->LocationB->getNode(index) == nullptr)
+        {
+            IsThereNode = false;
+        }
+        else
+        {
+            IsThereNode =true;
+            fullboxCount++;
+        }
+        currentBox = currentBox->nextBox;
+    }
+    return IsThereNode;
+
+}
+double ManagerList::calculateAvarageLocA()
+{
+    std::cout << std::endl << std::endl;
+   if (firstBox == nullptr) return 0;
+
+   Box* currentBox = firstBox;
+   int index = 0;
+   double sum = 0;
+   double avarege=0;
+ while (true)
+ {
+    
+    if (!IsThereNodeInBoxesLocA(index))
+    {
+       break;
+    }
+    currentBox = firstBox;
+    while (currentBox !=nullptr)
+    { 
+        if (currentBox->LocationA->getNode(index) != nullptr)
+        {
+         
+           std::cout << "|"<< currentBox->LocationA->getNode(index)->data <<"|";
+           sum+=currentBox->LocationA->getNode(index)->data;
+            currentBox = currentBox->nextBox;
+        }
+        else
+        {
+            
+            std::cout << "   ";
+            currentBox = currentBox->nextBox;
+        }
+       
+    }
+    std::cout << " sum : " << sum << "  box count : " << fullboxCount << "  ";
+    avarege += (double) (sum/fullboxCount);
+    std::cout << "avarege is : " << avarege << std::endl;
+
+    sum=0;
+    fullboxCount=0;
+ 
+    
+    currentBox = firstBox;
+    index++;
+ }
+ 
+  return avarege ;
+}
+double ManagerList::calculateAvarageLocB()
+{
+
+ if (firstBox == nullptr) return 0;
+std::cout << std::endl << std::endl;
+   Box* currentBox = firstBox;
+   int index = 0;
+   double sum = 0;
+   double avarege=0;
+ while (true)
+ {
+    
+    if (!IsThereNodeInBoxesLocB(index))
+    {
+       break;
+    }
+    currentBox = firstBox;
+    while (currentBox !=nullptr)
+    { 
+        if (currentBox->LocationB->getNode(index) != nullptr)
+        {
+         
+             std::cout << "|"<< currentBox->LocationB->getNode(index)->data <<"|";
+           sum+=currentBox->LocationB->getNode(index)->data;
+            currentBox = currentBox->nextBox;
+        }
+        else
+        {
+            
+            std::cout << "   ";
+            currentBox = currentBox->nextBox;
+        }
+       
+    }
+    std::cout << " sum : " << sum << "  box count : " << fullboxCount << "  ";
+    avarege += (double) (sum/fullboxCount);
+    std::cout << "avarege is : " << avarege << std::endl;
+    sum=0;
+    fullboxCount=0;
+
+    
+    currentBox = firstBox;
+    index++;
+ }
+ 
+  return avarege ;
+}
+  
+
+void ManagerList::addBox(Box* newBox)
+{
+    if (firstBox == nullptr)
+    {
+        firstBox = newBox;
+        boxCount++;
+    }
+    else
+    {
+        Box * currentBox = firstBox;
+        while (currentBox->nextBox !=nullptr)
+        {
+            currentBox = currentBox->nextBox;
+        }
+        currentBox->nextBox=newBox;
+        
+       boxCount++;
+    }
+    
+}
+  Box * ManagerList::getBox(int index)
+  {
+    if(index+1 > boxCount) return nullptr; 
+
+
+    Box* current = firstBox;
+	while (index >= 0 && current != nullptr)
+	{
+
+		if (index == 0) return current;
+			
+		current = current->nextBox;
+
+		index--;
+	}
+	return current;
+}
+
+ManagerList::~ManagerList()
+{
+    if(firstBox == nullptr) return;
+
+    Box* currentBox = firstBox;
+	 while (currentBox != nullptr)
+	 {
+		 Box* deletedBox = currentBox;
+		 currentBox = currentBox->nextBox;
+
+		 delete deletedBox;
+	 }
+}
