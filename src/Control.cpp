@@ -44,8 +44,8 @@ void Control::ReadFile()
 }
 void Control::printAvarege()
 {
- std::cout << "\n\n  avarage is in LocA :" <<  manager->calculateAvarageLocA() << "  \n";
-  std::cout << "\n\n  avarage is in LocB :" <<  manager->calculateAvarageLocB() << "\n";
+ std::cout << "\n  avarage is in LocA :" <<  manager->calculateAvarageLocA() << "  \n";
+  std::cout << "  avarage is in LocB :" <<  manager->calculateAvarageLocB() << "";
 }
 Control::~Control()
 {

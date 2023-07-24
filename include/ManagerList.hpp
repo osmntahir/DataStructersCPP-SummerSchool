@@ -10,6 +10,7 @@ private:
     int boxCount;
     bool IsThereNode;
     int fullboxCount;
+    int findFullBoxCount(int index);
 public:
     ManagerList(/* args */);
     void addBox(Box *newBox);

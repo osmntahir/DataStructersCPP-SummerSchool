@@ -8,4 +8,6 @@ Box::Box()
 
 Box::~Box()
 {
+  if (LocationA != nullptr) delete LocationA;
+  if(LocationB != nullptr) delete LocationB;
 }

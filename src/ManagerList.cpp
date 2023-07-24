@@ -8,51 +8,79 @@ ManagerList::ManagerList()
 }
 void ManagerList::swapLinkedList(int location1 , int location2)
 {
+    if(location1+1 >boxCount || location2+1 > boxCount)
+    {
+    std::cout<< " hatali location girdiniz !";
+     return;
+    }
+    else
+    {
     LinkedList * temp =getBox(location2)->LocationB;
     getBox(location2)->LocationB = getBox(location1)->LocationA;
     getBox(location1)->LocationA = temp;
+       }
 
 }
 bool ManagerList::IsThereNodeInBoxesLocA(int index)
 {
-     Box* currentBox = firstBox;
-    while(currentBox !=nullptr)
+    Box* currentBox = firstBox;
+    while(currentBox->nextBox !=nullptr)
     {
-        if(currentBox->LocationA->getNode(index) == nullptr)
+        if(currentBox->LocationA->getNode(index) != nullptr)
         {
-            IsThereNode = false;
+            
+            IsThereNode =true;
+            return IsThereNode;
+          
         }
         else
         {
-            IsThereNode =true;
-            fullboxCount++;
+             IsThereNode = false;
         }
         currentBox = currentBox->nextBox;
     }
+ 
     return IsThereNode;
 }
-bool ManagerList::IsThereNodeInBoxesLocB(int index)
+int ManagerList::findFullBoxCount(int index)
 {
      Box* currentBox = firstBox;
     while(currentBox !=nullptr)
     {
-        if(currentBox->LocationB->getNode(index) == nullptr)
+        if(currentBox->LocationA->getNode(index) != nullptr)
         {
-            IsThereNode = false;
-        }
-        else
-        {
-            IsThereNode =true;
-            fullboxCount++;
+           fullboxCount++;
         }
         currentBox = currentBox->nextBox;
     }
+    return fullboxCount;
+
+}
+bool ManagerList::IsThereNodeInBoxesLocB(int index)
+{
+     Box* currentBox = firstBox;
+    while(currentBox->nextBox !=nullptr)
+    {
+        if(currentBox->LocationB->getNode(index) != nullptr)
+        {
+            
+            IsThereNode =true;
+            return IsThereNode;
+          
+        }
+        else
+        {
+             IsThereNode = false;
+        }
+        currentBox = currentBox->nextBox;
+    }
+ 
     return IsThereNode;
 
 }
 double ManagerList::calculateAvarageLocA()
 {
-    std::cout << std::endl << std::endl;
+   
    if (firstBox == nullptr) return 0;
 
    Box* currentBox = firstBox;
@@ -66,32 +94,32 @@ double ManagerList::calculateAvarageLocA()
     {
        break;
     }
+    findFullBoxCount(index);
     currentBox = firstBox;
     while (currentBox !=nullptr)
     { 
         if (currentBox->LocationA->getNode(index) != nullptr)
         {
          
-           std::cout << "|"<< currentBox->LocationA->getNode(index)->data <<"|";
+     //  std::cout << ""<< currentBox->LocationA->getNode(index)->data <<"";
            sum+=currentBox->LocationA->getNode(index)->data;
             currentBox = currentBox->nextBox;
         }
         else
         {
             
-            std::cout << "   ";
+     //   std::cout << " ";
             currentBox = currentBox->nextBox;
         }
        
     }
-    std::cout << " sum : " << sum << "  box count : " << fullboxCount << "  ";
-    avarege += (double) (sum/fullboxCount);
-    std::cout << "avarege is : " << avarege << std::endl;
-
+  
+    
+ //std::cout << "\n\n sum : " << sum << "  full of box count : " << fullboxCount << "  \n\n";
+    avarege +=  (sum/ fullboxCount);
+   // std::cout << "avarege is : " << avarege << std::endl;
     sum=0;
     fullboxCount=0;
- 
-    
     currentBox = firstBox;
     index++;
  }
@@ -102,8 +130,9 @@ double ManagerList::calculateAvarageLocB()
 {
 
  if (firstBox == nullptr) return 0;
-std::cout << std::endl << std::endl;
-   Box* currentBox = firstBox;
+
+
+Box* currentBox = firstBox;
    int index = 0;
    double sum = 0;
    double avarege=0;
@@ -114,31 +143,30 @@ std::cout << std::endl << std::endl;
     {
        break;
     }
+    findFullBoxCount(index);
     currentBox = firstBox;
     while (currentBox !=nullptr)
     { 
         if (currentBox->LocationB->getNode(index) != nullptr)
         {
          
-             std::cout << "|"<< currentBox->LocationB->getNode(index)->data <<"|";
+        //    std::cout << "|"<< currentBox->LocationB->getNode(index)->data <<"|";
            sum+=currentBox->LocationB->getNode(index)->data;
             currentBox = currentBox->nextBox;
         }
         else
         {
             
-            std::cout << "   ";
+      //   std::cout << "   ";
             currentBox = currentBox->nextBox;
         }
        
     }
-    std::cout << " sum : " << sum << "  box count : " << fullboxCount << "  ";
-    avarege += (double) (sum/fullboxCount);
-    std::cout << "avarege is : " << avarege << std::endl;
+// std::cout << " sum : " << sum << "  box count : " << fullboxCount << "  ";
+    avarege +=  (sum/fullboxCount);
+ //  std::cout << "avarege is : " << avarege << std::endl;
     sum=0;
     fullboxCount=0;
-
-    
     currentBox = firstBox;
     index++;
  }
@@ -194,7 +222,6 @@ ManagerList::~ManagerList()
 	 {
 		 Box* deletedBox = currentBox;
 		 currentBox = currentBox->nextBox;
-
 		 delete deletedBox;
 	 }
 }
